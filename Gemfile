@@ -14,11 +14,10 @@ group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'spring'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
 end
 
-# 追加
-
 gem 'grape'
-gem 'rspec-rails'
 gem 'backbone-on-rails'
 gem 'marionette-rails'

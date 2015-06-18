@@ -16,6 +16,7 @@ e-scheは以下の環境で動作します。
 * GEM
     * grape
     * rspec-rails
+    * factory_girl_rails
     * backbone-on-rails
     * marionette-rails
 * javascript
