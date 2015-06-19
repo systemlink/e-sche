@@ -21,3 +21,5 @@ end
 gem 'grape'
 gem 'backbone-on-rails'
 gem 'marionette-rails'
+# TODO railsが4.0以下のみ
+# gem 'backbone-stickit-rails'

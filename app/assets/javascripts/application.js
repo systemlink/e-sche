@@ -16,6 +16,7 @@
 //= require backbone.marionette
 //= require underscore
 //= require backbone
+//= require backbone.stickit
 //= require e_sche
 //= require_tree ../templates
 //= require_tree ./models
