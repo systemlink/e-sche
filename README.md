@@ -11,7 +11,7 @@ e-scheは以下の環境で動作します。
 * rails 4.2.2
 
 使用しているライブラリは下記の通りです。  
-詳しくはGemfileを参照してください。  
+詳しくは [Gemfile](https://github.com/systemlink/e-sche/blob/master/Gemfile) を参照してください。  
 
 * GEM
     * grape
