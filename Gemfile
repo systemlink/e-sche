@@ -23,3 +23,4 @@ gem 'backbone-on-rails'
 gem 'marionette-rails'
 # TODO railsが4.0以下のみ
 # gem 'backbone-stickit-rails'
+gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'

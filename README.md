@@ -11,9 +11,9 @@ e-scheは以下の環境で動作します。
 * rails 4.2.2
 
 使用しているライブラリは下記の通りです。  
-詳しくは [Gemfile](https://github.com/systemlink/e-sche/blob/master/Gemfile) を参照してください。  
 
-* GEM
+* GEM  
+詳しくは [Gemfile](https://github.com/systemlink/e-sche/blob/master/Gemfile) を参照してください。  
     * grape
     * rspec-rails
     * factory_girl_rails
@@ -21,6 +21,7 @@ e-scheは以下の環境で動作します。
     * marionette-rails
     * ~~backbone-stickit-rails~~  
     Railsが4.0以下のみ対応のため削除
+    * twitter-bootstrap-rails
 * javascript
     * Backbone.js
     * Marionette.js
