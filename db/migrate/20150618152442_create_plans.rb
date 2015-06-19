@@ -3,8 +3,6 @@ class CreatePlans < ActiveRecord::Migration
     create_table :plans do |t|
       t.string :title
       t.text :note
-      t.date :start_period
-      t.date :end_period
 
       t.timestamps null: false
     end

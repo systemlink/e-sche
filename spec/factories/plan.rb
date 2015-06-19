@@ -6,8 +6,6 @@ FactoryGirl.define do
     trait :full do
       title       "打ち合わせ"
       note        "次回プロジェクトの打ち合わせを行います"
-      start_period  Date.new(2015, 6, 10)
-      end_period    Date.new(2015, 6, 20)
     end
   end
 end
