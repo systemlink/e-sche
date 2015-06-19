@@ -1,6 +1,6 @@
-class CreatePlans < ActiveRecord::Migration
+class CreateEvents < ActiveRecord::Migration
   def change
-    create_table :plans do |t|
+    create_table :events do |t|
       t.string :title
       t.text :note
 

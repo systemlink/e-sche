@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :plan, class: Plan do
+  factory :event, class: Event do
     trait :blank do
     end
     
