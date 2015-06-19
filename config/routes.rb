@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-  root 'plans#index'
+  root 'events#index'
 end
