@@ -16,11 +16,18 @@ e-scheは以下の環境で動作します。
 * GEM
     * grape
     * rspec-rails
+    * factory_girl_rails
     * backbone-on-rails
     * marionette-rails
+    * ~~backbone-stickit-rails~~  
+    Railsが4.0以下のみ対応のため削除
 * javascript
     * Backbone.js
     * Marionette.js
+    * backbone.stickit.js
+* その他
+    * CoffeeScript
+    * Bootstrap
 
 ### 初期セットアップ
 
