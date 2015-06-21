@@ -1,0 +1,12 @@
+ja:
+  activerecord:
+    models:
+      event: "イベント"
+      candidate: "候補"
+    attributes:
+      event:
+        title: "タイトル"
+        note: "内容"
+      candidate:
+        event_id: "イベント"
+        date: "日付"
