@@ -4,5 +4,8 @@ class ESche.Routers.Event extends Backbone.Router
     '': 'new'
     
   initialize: ->
-    @event = new ESche.Models.Event()
-    console.log @event
+    @model = new ESche.Models.Event()
+    
+  new: ->
+    view = new ESche.Views.EventNew(model: @model)
+    $("#main").html(view.render().el)
