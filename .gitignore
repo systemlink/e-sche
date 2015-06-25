@@ -15,3 +15,12 @@
 /log/*
 !/log/.keep
 /tmp
+
+/vendor/bin
+/vendor/bundle
+*.swp
+*~
+.project
+.DS_Store
+.idea
+.secret
