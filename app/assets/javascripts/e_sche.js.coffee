@@ -3,7 +3,9 @@ window.ESche =
   Collections: {}
   Views: {}
   Routers: {}
-  initialize: -> console.log 'Hello from Backbone!'
+  initialize: ->
+    new ESche.Routers.Event
+    Backbone.history.start()
 
 $(document).ready ->
   ESche.initialize()
