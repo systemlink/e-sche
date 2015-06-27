@@ -51,11 +51,6 @@ GEM
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
-    backbone-on-rails (1.2.0.0)
-      eco
-      ejs
-      jquery-rails
-      railties
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
@@ -76,12 +71,6 @@ GEM
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     diff-lcs (1.2.5)
-    eco (1.0.0)
-      coffee-script
-      eco-source
-      execjs
-    eco-source (1.1.0.rc.1)
-    ejs (1.1.1)
     equalizer (0.0.11)
     erubis (2.7.0)
     execjs (2.5.2)
@@ -117,6 +106,9 @@ GEM
       rails-dom-testing (~> 1.0)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
+    jquery-turbolinks (2.1.0)
+      railties (>= 3.1.0)
+      turbolinks
     json (1.8.3)
     less (2.6.0)
       commonjs (~> 0.2.7)
@@ -129,8 +121,6 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
-    marionette-rails (2.4.1)
-      railties (>= 3.1)
     mime-types (2.6.1)
     mini_portile (0.6.2)
     minitest (5.7.0)
@@ -233,15 +223,14 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  backbone-on-rails
   byebug
   coffee-rails (~> 4.1.0)
   factory_girl_rails
   grape
-  grape-rabl
+  grape-rabl (= 0.3.1)
   jbuilder (~> 2.0)
   jquery-rails
-  marionette-rails
+  jquery-turbolinks
   rails (= 4.2.2)
   rspec-rails
   sass-rails (~> 5.0)
