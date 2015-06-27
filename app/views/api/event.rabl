@@ -1,3 +1,4 @@
-object @event => :event, :root => "event", :object_root => false
-attributes :titie, :note, :id
-
+object @event => :event
+attributes :title
+attributes :note
+attributes :id
