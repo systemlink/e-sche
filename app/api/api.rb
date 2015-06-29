@@ -2,6 +2,10 @@ class API < Grape::API
   format "json"
   formatter :json, Grape::Formatter::Rabl
 
+  rescue_from ActiveRecord::RecordNotFound do |e|
+    rack_response({ error: {message: e.message} }.to_json, 200)
+  end
+
   helpers do
     def event_params
       ActionController::Parameters.new(params).permit(:title, :note)
@@ -16,6 +20,7 @@ class API < Grape::API
     get ":id", rabl: "event" do
       @event = Event.find(params[:id])
     end
+
 
     # post /api/events
 =begin
