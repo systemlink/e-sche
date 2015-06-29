@@ -18,12 +18,14 @@ angular.module 'events', ['ngRoute']
 .controller 'index', () ->
   console.log "index"
 
-.controller 'show', ($scope, $http, $routeParams) ->
+.controller 'show', ($scope, $http, $routeParams, $location) ->
   $http.get "/api/events/" + $routeParams.eventId + ".json", {}
     .success (data, status, headers, config) ->
       if data.error
         alert "error"
       else
         $scope.event = data.event
+        $scope.url = $location.absUrl() + "/answers"
+        console.log $scope.url
     .error (data, status, headers, config) ->
       console.log "error"
