@@ -6,20 +6,20 @@
   <div class="form-group">
     <label class="col-sm-1 control-label" for="name">Title</label>
     <div class="col-sm-11">
-      <input class="form-control" type="text" ng-model="title">
+      <input class="form-control" type="text" ng-model="event.title">
     </div>
   </div>
 
   <div class="form-group">
     <label class="col-sm-1 control-label" for="hex">Note</label>
     <div class="col-sm-11">
-      <textarea class="form-control" ng-model="note"></textarea>
+      <textarea class="form-control" ng-model="event.note"></textarea>
     </div>
   </div>
   
   <div class="form-group">
     <div class="col-sm-offset-1 col-sm-11">
-      <input type="button" value="登録" class="btn btn-default" ng-click="click()">
+      <input type="button" value="登録" class="btn btn-default" ng-click="create(event)">
     </div>
   </div>
 </form>

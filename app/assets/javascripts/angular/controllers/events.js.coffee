@@ -27,11 +27,8 @@ angular.module 'events', ['ngRoute']
       console.log "error"
 
 .controller 'new', ($scope, $http) ->
-  $scope.click = ->
-    data = event:
-      title: $scope.title
-      note: $scope.note
-    $http.post "/api/events.json", data
+  $scope.create = (event) ->
+    $http.post "/api/events.json", event
       .success (data, status, headers, config) ->
         console.log "success : " + status
       .error (data, status, headers, config) ->
