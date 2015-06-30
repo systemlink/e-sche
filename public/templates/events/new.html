@@ -2,24 +2,20 @@
   <h1>新規イベント登録</h1>
 </div>
 
-<form class="form-horizontal well" role="form" method="post">
+<form name="form" novalidate>
   <div class="form-group">
-    <label class="col-sm-1 control-label" for="name">Title</label>
-    <div class="col-sm-11">
-      <input class="form-control" id="title" name="title" type="text">
-    </div>
+    <label for="eventTitle">タイトル</label>
+    <input name="eventTitle" class="form-control" type="text" ng-model="event.title" required>
+    <span ng-show="form.eventTitle.$error.required">必須です</span>
   </div>
 
   <div class="form-group">
-    <label class="col-sm-1 control-label" for="hex">Note</label>
-    <div class="col-sm-11">
-      <textarea class="form-control" id="note" name="note"></textarea>
-    </div>
+    <label for="eventNote">内容</label>
+    <textarea name="eventNote" class="form-control" ng-model="event.note" required></textarea>
+    <span ng-show="form.eventNote.$error.required">必須です</span>
   </div>
   
   <div class="form-group">
-    <div class="col-sm-offset-1 col-sm-11">
-      <input type="submit" value="登録" class="btn btn-default">
-    </div>
+    <input type="button" value="登録" class="btn btn-default" ng-click="create(event)" ng-disabled="form.$invalid">
   </div>
 </form>
