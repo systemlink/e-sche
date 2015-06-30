@@ -2,24 +2,24 @@
   <h1>新規イベント登録</h1>
 </div>
 
-<form class="form-horizontal well" role="form" method="post">
+<form class="form-horizontal well" role="form">
   <div class="form-group">
     <label class="col-sm-1 control-label" for="name">Title</label>
     <div class="col-sm-11">
-      <input class="form-control" id="title" name="title" type="text">
+      <input class="form-control" type="text" ng-model="title">
     </div>
   </div>
 
   <div class="form-group">
     <label class="col-sm-1 control-label" for="hex">Note</label>
     <div class="col-sm-11">
-      <textarea class="form-control" id="note" name="note"></textarea>
+      <textarea class="form-control" ng-model="note"></textarea>
     </div>
   </div>
   
   <div class="form-group">
     <div class="col-sm-offset-1 col-sm-11">
-      <input type="submit" value="登録" class="btn btn-default">
+      <input type="button" value="登録" class="btn btn-default" ng-click="click()">
     </div>
   </div>
 </form>

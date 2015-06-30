@@ -5,18 +5,15 @@ angular.module 'events', ['ngRoute']
 .config ($routeProvider, $locationProvider) ->
   $routeProvider
     .when '/',
-      templateUrl: '/templates/events/index.html'
-      controller: 'index'
-    .when '/events',
-      templateUrl: '/templates/events/index.html'
-      controller: 'index'
+      templateUrl: '/templates/events/new.html'
+      controller: 'new'
     .when '/events/:eventId',
       templateUrl: '/templates/events/show.html'
       controller: 'show'
+    .when '/events/new',
+      templateUrl: '/templates/events/new.html'
+      controller: 'new'
 #  $locationProvider.html5Mode true
-
-.controller 'index', () ->
-  console.log "index"
 
 .controller 'show', ($scope, $http, $routeParams, $location) ->
   $http.get "/api/events/" + $routeParams.eventId + ".json", {}
@@ -26,6 +23,16 @@ angular.module 'events', ['ngRoute']
       else
         $scope.event = data.event
         $scope.url = $location.absUrl() + "/answers"
-        console.log $scope.url
     .error (data, status, headers, config) ->
       console.log "error"
+
+.controller 'new', ($scope, $http) ->
+  $scope.click = ->
+    data = event:
+      title: $scope.title
+      note: $scope.note
+    $http.post "/api/events.json", data
+      .success (data, status, headers, config) ->
+        console.log "success : " + status
+      .error (data, status, headers, config) ->
+        console.log "error : " + status
