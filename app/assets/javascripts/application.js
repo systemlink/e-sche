@@ -17,7 +17,6 @@
 //= require turbolinks
 //= require angular.min
 //= require angular-route.min
-//= require angular-ui-router.min
 //= require_tree ./angular
 //= require e_sche
 //= require_tree .
