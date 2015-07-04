@@ -16,6 +16,29 @@
   </div>
   
   <div class="form-group">
+    <label>候補日</label>
+    <div class="col-sm-12 well">
+      <div class="col-sm-6">
+        <div class="input-group">
+          <input type="date" class="form-control" ng-model="dateFrom">
+          <span class="input-group-addon">から</span>
+          <input type="date" class="form-control" ng-model="dateTo">
+          <span class="input-group-btn">
+            <input type="button" class="btn btn-default" value="選択 >>" ng-click="addDates(dateFrom, dateTo)">
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-offset-1 col-sm-5">
+        <div class="checkbox" ng-repeat="date in dates">
+          <label>
+            <input type="checkbox" checked> {{ date | date: 'yyyy-MM-dd' }}
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="form-group">
     <input type="button" value="登録" class="btn btn-default" ng-click="create(event)" ng-disabled="form.$invalid">
   </div>
 </form>
