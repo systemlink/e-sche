@@ -1,21 +1,31 @@
 'use strict'
 
-angular.module 'events', ['ngRoute']
+angular.module 'esche', ['ngRoute']
 
 .config ($routeProvider, $locationProvider) ->
   $routeProvider
     .when '/',
       templateUrl: '/templates/events/new.html'
-      controller: 'new'
-    .when '/events/:eventId',
-      templateUrl: '/templates/events/show.html'
-      controller: 'show'
+      controller: 'EventsCtrl.new'
     .when '/events/new',
       templateUrl: '/templates/events/new.html'
-      controller: 'new'
+      controller: 'EventsCtrl.new'
+    .when '/events/:eventId',
+      templateUrl: '/templates/events/show.html'
+      controller: 'EventsCtrl.show'
 #  $locationProvider.html5Mode true
 
-.controller 'show', ($scope, $http, $routeParams, $location) ->
+.controller "EventsCtrl.new", ($scope, $http, $routeParams, $location) ->
+  $scope.create = (event) ->
+    $http.post "/api/events.json", event
+      .success (data, status, headers, config) ->
+        console.log "success : " + status
+        console.log data
+        $location.path "/events/" + data.event.id
+      .error (data, status, headers, config) ->
+        console.log "error : " + status
+  
+.controller 'EventsCtrl.show', ($scope, $http, $routeParams, $location) ->
   $http.get "/api/events/" + $routeParams.eventId + ".json", {}
     .success (data, status, headers, config) ->
       if data.error
@@ -25,11 +35,3 @@ angular.module 'events', ['ngRoute']
         $scope.url = $location.absUrl() + "/answers"
     .error (data, status, headers, config) ->
       console.log "error"
-
-.controller 'new', ($scope, $http) ->
-  $scope.create = (event) ->
-    $http.post "/api/events.json", event
-      .success (data, status, headers, config) ->
-        console.log "success : " + status
-      .error (data, status, headers, config) ->
-        console.log "error : " + status
