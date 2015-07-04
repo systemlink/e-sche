@@ -44,7 +44,34 @@ RSpec.describe "Events", type: :request do
         expect(body).to have_json_path('error/message')
       end
     end
+  end
+  describe "POST /api/events.json" do
+    context "パラメタが正しい場合" do
+      before do
+        @params = {title: "foo", note: "bar"}
+        # @params = {event: FactoryGirl.attributes_for(:event)}
+      end
 
-      
+      it "201 created が返ってくる" do
+        post "/api/events", @params
+        expect(response).to be_success
+        expect(response.status).to eq(201)
+      end
+      it "登録したイベントと同じ内容でレスポンスする" do
+        post "/api/events", @params
+        body = response.body
+        expect(body).to have_json_path('event')
+        expect(body).to have_json_path('event/title')
+        expect(body).to have_json_path('event/note')
+        expect(body).to be_json_eql(%("#{@params[:title]}")).at_path('event/title')
+        expect(body).to be_json_eql(%("#{@params[:note]}")).at_path('event/note')
+      end
+      it "Event の件数が１件増える" do
+        expect {
+          post "/api/events", @params
+        }.to change(Event, :count).by(1)
+      end
+
+    end
   end
 end
