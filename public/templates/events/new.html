@@ -29,9 +29,9 @@
         </div>
       </div>
       <div class="col-sm-offset-1 col-sm-5">
-        <div class="checkbox" ng-repeat="date in dates">
-          <label>
-            <input type="checkbox" checked> {{ date | date: 'yyyy-MM-dd' }}
+        <div class="checkbox" ng-repeat="date in event.dates">
+          <label ng-click="dateChange($index)">
+            <input type="checkbox" value="{{ date }}" ng-checked="{{ true }}"> {{ date | date: 'yyyy-MM-dd' }}
           </label>
         </div>
       </div>
