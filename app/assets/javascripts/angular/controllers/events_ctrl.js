@@ -12,8 +12,8 @@
       $scope.dateFrom = new Date();
       $scope.dateTo = new Date();
       $scope.dateTo.setDate($scope.dateTo.getDate() + 7);
-      $scope.create = function (event) {
-        eventService.create(event, function (data) {
+      $scope.create = function () {
+        eventService.create($scope.event, function (data) {
           $location.path("/events/" + data.event.id);
         });
       };
