@@ -5,9 +5,6 @@ class API < Grape::API
   rescue_from ActiveRecord::RecordNotFound do |e|
     rack_response({ error: {message: e.message} }.to_json, 404)
   end
-  # rescue_from ActiveRecord::RecordInvalid do |e|
-  #   rack_response({ error: {message: e.message} }.to_json, 400)
-  # end
 
   helpers do
     def event_params
@@ -30,16 +27,13 @@ class API < Grape::API
       requires :title, type: String, desc: "Event title."
     end
     desc "イベントを新規登録します"
-    # post "/", rabl: "event" do
     post "/" do
       @event = Event.new(event_params)
       if @event.save
         render rabl: "event"
       else
-#       @error = {:message => "saveできません"}
         @errors = @event.errors
         render rabl: "error"
-#       render rabl: "error", locals: {:message => "saveできません"}
       end
     end
   end

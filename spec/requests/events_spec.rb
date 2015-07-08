@@ -82,7 +82,6 @@ RSpec.describe "Events", type: :request do
         end
         it "エラーメッセージの json を返す" do
           body = response.body
-          print body
           expect(body).to have_json_path('error')
           expect(body).to have_json_path('error/message')
         end

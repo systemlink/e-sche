@@ -1,5 +1,13 @@
-object @errors => :error
+object false
 
-node(:message)  do 
-  @errors.full_messages 
+messages = []
+@errors.full_messages.each do |m|
+  messages << m
 end
+
+node(:error) do
+  {
+    :message => messages
+  }
+end 
+
