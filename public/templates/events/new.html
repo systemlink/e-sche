@@ -2,7 +2,7 @@
   <h1>新規イベント登録</h1>
 </div>
 
-<form name="form" novalidate>
+<form name="form" ng-submit="create()" novalidate>
   <div class="form-group">
     <label for="eventTitle">タイトル</label>
     <input name="eventTitle" class="form-control" type="text" ng-model="event.title" required>
@@ -39,6 +39,6 @@
   </div>
   
   <div class="form-group">
-    <input type="button" value="登録" class="btn btn-default" ng-click="create(event)" ng-disabled="form.$invalid">
+    <input type="submit" value="登録" class="btn btn-default" ng-disabled="form.$invalid">
   </div>
 </form>
