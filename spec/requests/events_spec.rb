@@ -34,9 +34,8 @@ RSpec.describe "Events", type: :request do
         event.delete 
         get "/api/events/#{event.id}.json"
       end
-      it "200 OK が返ってくる" do
-        expect(response).to be_success
-        expect(response.status).to eq(200)
+      it "400 NotFound が返ってくる" do
+        expect(response.status).to eq(404)
       end
       it "エラーメッセージのjsonを返す" do
         body = response.body
@@ -49,7 +48,7 @@ RSpec.describe "Events", type: :request do
     context "パラメタが正しい場合" do
       before do
         @params = {title: "foo", note: "bar"}
-        # @params = {event: FactoryGirl.attributes_for(:event)}
+        # @params = FactoryGirl.attributes_for(:event)
       end
 
       it "201 created が返ってくる" do
@@ -71,7 +70,22 @@ RSpec.describe "Events", type: :request do
           post "/api/events", @params
         }.to change(Event, :count).by(1)
       end
-
+    end
+    context "パラメタが正しくない場合" do
+      context "タイトルに入力がない場合" do
+        before do
+          @params = {title: "", note: ""}
+          post "/api/events", @params
+        end
+        it "HTTP STATUS は201 Created が返える" do
+          expect(response.status).to eq(201)
+        end
+        it "エラーメッセージの json を返す" do
+          body = response.body
+          expect(body).to have_json_path('error')
+          expect(body).to have_json_path('error/message')
+        end
+      end
     end
   end
 end
