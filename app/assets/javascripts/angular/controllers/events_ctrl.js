@@ -26,9 +26,16 @@
       };
     })
     .controller("EventsCtrl.show", function ($scope, $routeParams, $location, eventService) {
+      $scope.mail = {
+        from_address: "",
+        to_addresses: ""
+      };
       eventService.show($routeParams.eventId, function (data) {
         $scope.event = data.event;
         $scope.url = $location.absUrl() + "/answers";
+        $scope.send_mail = function () {
+          eventService.sendMail($routeParams.eventId, $scope.mail);
+        };
       });
     });
 }());

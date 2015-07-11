@@ -35,8 +35,8 @@ module ESche
       :port => '587',
       :domain => 'smtp.gmail.com',
       :authentication => 'plain',
-      :user_name => 'syslink.h.inoue@gmail.com',
-      :password => 'Jhvr3377!'
+      :user_name => ENV["MAIL_USER_NAME"],
+      :password => ENV["MAIL_PASSWORD"]
     }
   end
 end
