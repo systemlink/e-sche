@@ -47,6 +47,11 @@
         }
         return dates;
       };
+      this.sendMail = function (eventId, args) {
+        $http.post("/api/events/" + eventId + "/send_mail", args)
+          .success(function () { alert("メールを送信しました。"); })
+          .error(function () { alert("メールの送信に失敗しました。"); });
+      };
     });
 
 }());
