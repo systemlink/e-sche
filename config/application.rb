@@ -27,5 +27,16 @@ module ESche
     config.middleware.use(Rack::Config) do |env| 
       env['api.tilt.root'] = Rails.root.join 'app', 'views', 'api'
     end
+    
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      :enable_starttls_auto => true,
+      :address => 'smtp.gmail.com',
+      :port => '587',
+      :domain => 'smtp.gmail.com',
+      :authentication => 'plain',
+      :user_name => ENV["MAIL_USER_NAME"],
+      :password => ENV["MAIL_PASSWORD"]
+    }
   end
 end

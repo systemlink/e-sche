@@ -3,3 +3,24 @@
   <pre>{{event.note}}</pre>
   <p><a href="{{url}}">{{url}}</a></p>
 </div>
+<div>
+  <fieldset>
+    <lagend>メール送信</lagend>
+    <form name="form" ng-submit="send_mail()" novalidate>
+      <div class="form-group">
+        <label for="mailFromAddress">送信元メールアドレス</label>
+        <input name="mailFromAddress" class="form-control" type="mail" ng-model="mail.from_address" required>
+        <span ng-show="form.mailFromAddress.$error.required">必須です</span>
+      </div>
+      <div class="form-group">
+        <label for="mailToAddresses">送信先メールアドレス</label>
+        <input name="mailToAddresses" class="form-control" type="mail" ng-model="mail.to_addresses" required>
+        <span ng-show="form.mailToAddresses.$error.required">必須です</span>
+      </div>
+
+      <div class="form-group">
+        <input type="submit" value="送信" class="btn btn-default" ng-disabled="form.$invalid">
+      </div>
+    </form>
+  </fieldset>
+</div>

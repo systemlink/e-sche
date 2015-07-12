@@ -36,5 +36,27 @@ class API < Grape::API
         render rabl: "error"
       end
     end
+
+    # post /api/events/:id/send_mail
+    params do
+      requires :id, type: Integer, desc: "Event id."
+    end
+    desc "イベントの通知メールを送信します"
+    post ":id/send_mail", rabl: "event" do
+      @event = Event.find(params[:id])
+      @url = headers["Origin"] + "/#/events/#{@event.id}"
+      
+      mailer = EventMailer.notification(params[:from_address], params[:to_addresses], @event)
+      mailer.body = <<BODY
+次のアドレスを開いて、都合のいい日時を○×で記入してください。
+
+#{headers["Origin"]}/#/events/#{@event.id}
+
+#{@event.title}
+---
+#{@event.note}
+BODY
+      mailer.deliver
+    end
   end
 end
