@@ -87,5 +87,32 @@ RSpec.describe "Events", type: :request do
         end
       end
     end
+    context "候補日 も登録する場合" do
+      before do
+        date1 = "2015-07-10T15:00:00.000Z"
+        date2 = "2015-07-11T15:00:00.000Z"
+        @params = {title: "foo", note: "bar", :dates => [date1,date2]}
+      end
+      it "Event の件数が１件増える" do
+        expect {
+          post "/api/events", @params
+        }.to change(Event, :count).by(1)
+      end
+      it "dates の数だけCandidat の件数が増える" do
+        dates_count = @params[:dates].count
+        expect {
+          post "/api/events", @params
+        }.to change(Candidate, :count).by(dates_count)
+      end
+      it "登録したイベントと同じ内容でレスポンスする" do
+        post "/api/events", @params
+        body = response.body
+        expect(body).to have_json_path('event')
+        expect(body).to have_json_path('event/title')
+        expect(body).to have_json_path('event/note')
+        expect(body).to be_json_eql(%("#{@params[:title]}")).at_path('event/title')
+        expect(body).to be_json_eql(%("#{@params[:note]}")).at_path('event/note')
+      end
+    end
   end
 end

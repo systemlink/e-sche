@@ -8,7 +8,10 @@ class API < Grape::API
 
   helpers do
     def event_params
-      ActionController::Parameters.new(params).permit(:title, :note)
+      ActionController::Parameters.new(params).permit(:title, :note, :dates)
+    end
+    def candidate_params
+      ActionController::Parameters.new(params).permit(:dates)
     end
   end
 
@@ -29,6 +32,16 @@ class API < Grape::API
     desc "イベントを新規登録します"
     post "/" do
       @event = Event.new(event_params)
+      # 候補日
+      dates = []
+      params.each do |key, value|
+        if key == 'dates'
+          value.each do  |v|
+            dates << {:date => v}
+          end
+        end
+      end
+      @event.candidates.build(dates)
       if @event.save
         render rabl: "event"
       else
