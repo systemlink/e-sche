@@ -10,9 +10,6 @@ class API < Grape::API
     def event_params
       ActionController::Parameters.new(params).permit(:title, :note, :dates)
     end
-    def candidate_params
-      ActionController::Parameters.new(params).permit(:dates)
-    end
   end
 
   resource "events" do
@@ -41,7 +38,7 @@ class API < Grape::API
           end
         end
       end
-      @event.candidates.build(dates)
+      @event.candidates.build(dates) if dates.present?
       if @event.save
         render rabl: "event"
       else
