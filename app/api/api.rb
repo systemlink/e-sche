@@ -8,7 +8,7 @@ class API < Grape::API
 
   helpers do
     def event_params
-      ActionController::Parameters.new(params).permit(:title, :note, :dates)
+      ActionController::Parameters.new(params).permit(:title, :note)
     end
   end
 
