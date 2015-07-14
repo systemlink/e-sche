@@ -55,7 +55,7 @@ class API < Grape::API
 ---
 #{@event.note}
 BODY
-      mailer.deliver
+      mailer.deliver_now
     end
   end
 end
