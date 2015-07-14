@@ -30,14 +30,7 @@ class API < Grape::API
     post "/" do
       @event = Event.new(event_params)
       # 候補日
-      dates = []
-      params.each do |key, value|
-        if key == 'dates'
-          value.each do  |v|
-            dates << {:date => v}
-          end
-        end
-      end
+      dates = (params['dates'] || []).map {|v| {:date => v}}
       @event.candidates.build(dates) if dates.present?
       if @event.save
         render rabl: "event"
