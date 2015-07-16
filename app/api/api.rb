@@ -29,6 +29,9 @@ class API < Grape::API
     desc "イベントを新規登録します"
     post "/" do
       @event = Event.new(event_params)
+      # 候補日
+      dates = (params['dates'] || []).map {|v| {:date => v}}
+      @event.candidates.build(dates) if dates.present?
       if @event.save
         render rabl: "event"
       else
