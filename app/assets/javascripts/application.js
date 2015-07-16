@@ -14,6 +14,7 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require twitter/bootstrap
+//= require material.min
 //= require turbolinks
 //= require angular.min
 //= require angular-route.min

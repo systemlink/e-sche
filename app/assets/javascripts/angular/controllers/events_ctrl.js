@@ -21,9 +21,6 @@
         $scope.event.dates = eventService.getDates(dateFrom, dateTo);
       };
       $scope.addDates($scope.dateFrom, $scope.dateTo);
-      $scope.dateChange = function (index) {
-        $scope.event.dates.splice(index, 1);
-      };
     })
     .controller("EventsCtrl.show", function ($scope, $routeParams, $location, eventService) {
       $scope.mail = {

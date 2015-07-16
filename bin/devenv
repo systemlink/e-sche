@@ -1,0 +1,4 @@
+export MAIL_USER_NAME=syslink.h.inoue@gmail.com
+export MAIL_PASSWORD=Jhvr3377#!
+
+rails s

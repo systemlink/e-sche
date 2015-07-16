@@ -7,7 +7,17 @@
 
     .service('eventService', function ($http) {
       this.create = function (args, success) {
-        $http.post("/api/events.json", args)
+        var dates = [];
+        angular.forEach(args.dates, function (date, i) {
+          if (date.checked) {
+            dates.push(date.value);
+          }
+        });
+        $http.post("/api/events.json", {
+          title: args.title,
+          note: args.note,
+          dates: dates
+        })
           .success(function (data) {
             if (data.error) {
               alert(data.error);
@@ -36,12 +46,17 @@
         var
           currentDate,
           toDate,
+          date,
           dates = [];
         if (angular.isDefined(inputFrom) && angular.isDefined(inputTo)) {
           currentDate = new Date(inputFrom);
           toDate = new Date(inputTo);
           while (currentDate <= toDate) {
-            dates[dates.length] = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
+            date = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
+            dates[dates.length] = {
+              value: date,
+              checked: true
+            };
             currentDate.setDate(currentDate.getDate() + 1);
           }
         }
