@@ -29,6 +29,9 @@ class API < Grape::API
     desc "イベントを新規登録します"
     post "/" do
       @event = Event.new(event_params)
+      # 候補日
+      dates = (params['dates'] || []).map {|v| {:date => v}}
+      @event.candidates.build(dates) if dates.present?
       if @event.save
         render rabl: "event"
       else
@@ -44,7 +47,6 @@ class API < Grape::API
     desc "イベントの通知メールを送信します"
     post ":id/send_mail", rabl: "event" do
       @event = Event.find(params[:id])
-      @url = headers["Origin"] + "/#/events/#{@event.id}"
       
       mailer = EventMailer.notification(params[:from_address], params[:to_addresses], @event)
       mailer.body = <<BODY
@@ -56,7 +58,7 @@ class API < Grape::API
 ---
 #{@event.note}
 BODY
-      mailer.deliver
+      mailer.deliver_now
     end
   end
 end
