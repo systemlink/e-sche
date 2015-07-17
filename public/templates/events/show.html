@@ -1,7 +1,19 @@
-<div>
-  <label>{{event.title}}</label>
-  <pre>{{event.note}}</pre>
-  <p><a href="{{url}}">{{url}}</a></p>
+<div class="col-sm-12">
+  <h3>イベント確認</h3>
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      {{event.title}}
+    </div>
+    <div class="panel-body">
+      <div class="col-sm-4">
+        <label>候補日選択先アドレス</label><br>
+        <a href="{{url}}">{{url}}</a>
+      </div>
+      <div class="col-sm-8">
+        <pre class="well well-sm">{{event.note}}</pre>
+      </div>
+    </div>
+  </div>
 </div>
 <hr class="col-sm-12">
 <div class="col-sm-12">
@@ -21,7 +33,9 @@
     </div>
 
     <div class="form-group">
-      <input type="submit" value="送信" class="btn btn-primary" ng-disabled="form.$invalid">
+      <div class="col-sm-offset-2 col-sm-10">
+        <input type="submit" value="送信" class="btn btn-primary btn-block" ng-disabled="form.$invalid">
+      </div>
     </div>
   </form>
 </div>
