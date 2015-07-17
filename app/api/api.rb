@@ -47,7 +47,6 @@ class API < Grape::API
     desc "イベントの通知メールを送信します"
     post ":id/send_mail", rabl: "event" do
       @event = Event.find(params[:id])
-      @url = headers["Origin"] + "/#/events/#{@event.id}"
       
       mailer = EventMailer.notification(params[:from_address], params[:to_addresses], @event)
       mailer.body = <<BODY
@@ -59,7 +58,7 @@ class API < Grape::API
 ---
 #{@event.note}
 BODY
-      mailer.deliver
+      mailer.deliver_now
     end
   end
 end

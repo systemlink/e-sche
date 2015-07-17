@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module 'esche', ['ngRoute']
+angular.module 'esche', ['ngRoute', 'angular-loading-bar']
 
 .config ($routeProvider, $locationProvider) ->
   $routeProvider
