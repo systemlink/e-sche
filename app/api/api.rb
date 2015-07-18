@@ -12,7 +12,7 @@ class API < Grape::API
     end
   end
 
-  resource "events" do
+  resources "events" do
     # get /api/events/:id
     params do
       requires :id, type: Integer, desc: "Event id."
@@ -59,6 +59,17 @@ class API < Grape::API
 #{@event.note}
 BODY
       mailer.deliver_now
+    end
+    
+    params do
+      requires :event_id, type: Integer, desc: "Event id."
+    end
+    route_param :event_id do
+      resources "answers" do
+        get "/" do
+          puts "answers"
+        end
+      end
     end
   end
 end
