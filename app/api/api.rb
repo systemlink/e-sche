@@ -10,6 +10,10 @@ class API < Grape::API
     def event_params
       ActionController::Parameters.new(params).permit(:title, :note)
     end
+    
+    def answer_params
+      ActionController::Parameters.new(params).permit(:event_id, :name)
+    end
   end
 
   resources "events" do
@@ -66,8 +70,17 @@ BODY
     end
     route_param :event_id do
       resources "answers" do
-        get "/" do
-          puts "answers"
+        post "/" do
+          @answer = Answer.new(answer_params)
+          @answer.joins.build((params[:dates] || []).map{|date| {
+            candidate_id: Candidate.where(date: date).first.try(:id)
+          }})
+          if @answer.save
+            render rabl: "answer"
+          else
+            @errors = @answer.errors
+            render rabl: "errer"
+          end
         end
       end
     end
