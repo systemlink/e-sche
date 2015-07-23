@@ -13,4 +13,7 @@ angular.module 'esche', ['ngRoute', 'angular-loading-bar']
     .when '/events/:eventId',
       templateUrl: '/templates/events/show.html'
       controller: 'EventsCtrl.show'
+    .when '/events/:eventId/answers',
+      templateUrl: '/templates/answers/new.html'
+      controller: 'AnswersCtrl.new'
 #  $locationProvider.html5Mode true

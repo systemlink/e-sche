@@ -1,0 +1,27 @@
+<div class="col-sm-12">
+  <div class="col-sm-3">
+    <h3>参加者</h3>
+    <ul class="list-group">
+      <li class="list-group-item" ng-repeat="answer in event.answers">
+        {{answer.name}}
+      </li>
+    </ul>
+  </div>
+  <div class="col-sm-9">
+    <h3>参加状況</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>日付</th>
+          <th>参加者</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="date in event.dates">
+          <td>{{date.date}}</td>
+          <td><span class="badge">{{date.answers.length}}</span> {{date.answers | joins:"name"}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
