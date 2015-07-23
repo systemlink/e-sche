@@ -22,5 +22,5 @@ group :development, :test do
 end
 
 gem 'grape'
-gem 'grape-rabl', '0.3.1'
+gem 'grape-jbuilder'
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'

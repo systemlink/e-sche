@@ -1,6 +1,6 @@
 class API < Grape::API
   format "json"
-  formatter :json, Grape::Formatter::Rabl
+  formatter :json, Grape::Formatter::Jbuilder
 
   rescue_from ActiveRecord::RecordNotFound do |e|
     rack_response({ error: {message: e.message} }.to_json, 404)
@@ -22,7 +22,7 @@ class API < Grape::API
       requires :id, type: Integer, desc: "Event id."
     end
     desc "イベントを返します"
-    get ":id", rabl: "event" do
+    get ":id", jbuilder: "events/show" do
       @event = Event.find(params[:id])
     end
 
@@ -31,17 +31,12 @@ class API < Grape::API
       requires :title, type: String, desc: "Event title."
     end
     desc "イベントを新規登録します"
-    post "/" do
-      @event = Event.new(event_params)
-      # 候補日
-      dates = (params['dates'] || []).map {|v| {:date => v}}
-      @event.candidates.build(dates) if dates.present?
-      if @event.save
-        render rabl: "event"
-      else
-        @errors = @event.errors
-        render rabl: "error"
+    post "/", jbuilder: "events/show" do
+      @event = Event.new(event_params) do |event|
+        # 候補日
+        event.candidates.build((params['dates'] || []).map {|v| {:date => v}})
       end
+      @event.save
     end
 
     # post /api/events/:id/send_mail
@@ -49,14 +44,14 @@ class API < Grape::API
       requires :id, type: Integer, desc: "Event id."
     end
     desc "イベントの通知メールを送信します"
-    post ":id/send_mail", rabl: "event" do
+    post ":id/send_mail", jbuilder: "events/show" do
       @event = Event.find(params[:id])
       
       mailer = EventMailer.notification(params[:from_address], params[:to_addresses], @event)
       mailer.body = <<BODY
 次のアドレスを開いて、都合のいい日時を○×で記入してください。
 
-#{headers["Origin"]}/#/events/#{@event.id}
+#{headers["Origin"]}/#/events/#{@event.id}/answers
 
 #{@event.title}
 ---
@@ -70,17 +65,12 @@ BODY
     end
     route_param :event_id do
       resources "answers" do
-        post "/" do
+        post "/", jbuilder: "answers/show" do
           @answer = Answer.new(answer_params)
           @answer.joins.build((params[:dates] || []).map{|date| {
-            candidate_id: Candidate.where(date: date).first.try(:id)
+            candidate_id: Candidate.where(event_id: params[:event_id], date: date).first.try(:id)
           }})
-          if @answer.save
-            render rabl: "answer"
-          else
-            @errors = @answer.errors
-            render rabl: "errer"
-          end
+          @answer.save
         end
       end
     end

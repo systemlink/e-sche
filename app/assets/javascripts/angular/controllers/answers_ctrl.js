@@ -10,10 +10,11 @@
         joins: []
       };
       eventService.show($routeParams.eventId, function (data) {
-        angular.forEach(data.event.dates, function (date, i) {
+        angular.forEach(data.event.dates, function (candidate, i) {
+          console.log(data.event);
           $scope.event = data.event;
           $scope.answer.joins.push({
-            date: date,
+            date: candidate.date,
             checked: true
           });
         });
