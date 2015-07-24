@@ -3,7 +3,7 @@
   'use strict';
   
   angular.module('esche')
-    .controller("AnswersCtrl.new", function ($scope, $routeParams, $location, eventService, answerService) {
+    .controller("AnswersCtrl.new", ["$scope", "$routeParams", "$location", "eventService", "answerService", function ($scope, $routeParams, $location, eventService, answerService) {
       $scope.answer = {
         eventId: $routeParams.eventId,
         name: "",
@@ -24,5 +24,5 @@
           $location.path("/events/" + data.answer.event_id);
         });
       };
-    });
+    }]);
 }());

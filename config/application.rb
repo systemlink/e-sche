@@ -26,7 +26,6 @@ module ESche
     # grape-jbuilder
     config.paths.add "app/api", glob: "**/*.rb"
     config.autoload_paths += %W(#{config.root}/app/api)
-    # grape-rabl を使用しまう
     config.middleware.use(Rack::Config) do |env| 
       env['api.tilt.root'] = Rails.root.join 'app', 'views', 'api'
     end

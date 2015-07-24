@@ -3,7 +3,7 @@
   'use strict';
 
   angular.module('esche')
-    .controller("EventsCtrl.new", function ($scope, $location, eventService) {
+    .controller("EventsCtrl.new", ["$scope", "$location", "eventService", function ($scope, $location, eventService) {
       $scope.event = {
         title: "",
         note: "",
@@ -21,8 +21,8 @@
         $scope.event.dates = eventService.getDates(dateFrom, dateTo);
       };
       $scope.addDates($scope.dateFrom, $scope.dateTo);
-    })
-    .controller("EventsCtrl.show", function ($scope, $routeParams, $location, eventService) {
+    }])
+    .controller("EventsCtrl.show", ["$scope", "$routeParams", "$location", "eventService", function ($scope, $routeParams, $location, eventService) {
       $scope.mail = {
         from_address: "",
         to_addresses: ""
@@ -34,5 +34,5 @@
           eventService.sendMail($routeParams.eventId, $scope.mail);
         };
       });
-    });
+    }]);
 }());

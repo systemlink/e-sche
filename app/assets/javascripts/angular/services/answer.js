@@ -4,7 +4,7 @@
   
   angular.module('esche')
   
-    .service('answerService', function ($http) {
+    .service('answerService', ["$http", function ($http) {
       this.create = function (args, success) {
         var dates = [];
         angular.forEach(args.joins, function (join, i) {
@@ -28,5 +28,5 @@
             console.log("error : " + status);
           });
       };
-    });
+    }]);
 }());

@@ -5,7 +5,7 @@
 
   angular.module('esche')
 
-    .service('eventService', function ($http) {
+    .service('eventService', ["$http", function ($http) {
       this.create = function (args, success) {
         var dates = [];
         angular.forEach(args.dates, function (date, i) {
@@ -67,6 +67,6 @@
           .success(function () { alert("メールを送信しました。"); })
           .error(function () { alert("メールの送信に失敗しました。"); });
       };
-    });
+    }]);
 
 }());
